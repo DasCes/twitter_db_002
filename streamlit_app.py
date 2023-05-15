@@ -9,7 +9,7 @@ db = firestore.Client.from_service_account_json("firestore-key.json")
 db_ref = db.collection("tweets")
 
 
-df = pd.read_csv(f'../data/clear_dataset/data.csv', index_col=[0])
+df = pd.read_csv(f'data/data.csv', index_col=[0])
 df = df.head(3)
 
 for index, row in df.iterrows():
