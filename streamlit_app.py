@@ -9,7 +9,7 @@ import time
 db = firestore.Client.from_service_account_json("firestore-key.json")
 
 # definiamo il riferimento al db
-db_ref = db.collection("tweeets")
+db_ref = db.collection("tweeets").order_by('id')
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
@@ -17,7 +17,6 @@ df = df.head(30)
 
 
 # stampiamo tutto il db con un ciclo
-db_ref.order_by('id')
 for doc in db_ref.stream():
     st.write("the id is: ", doc.id)
     st.write("contents of db: ", doc.to_dict())
