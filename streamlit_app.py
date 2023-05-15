@@ -10,16 +10,19 @@ db_ref = db.collection("tweets")
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
-df = df.head(3)
+df = df.head(10)
 
 for index, row in df.iterrows():
     doc_ref = db_ref.document("i" + str(index))
-    doc_ref.set({
-        'id': index,
-        'text': row['text'],
-        'created_at': row['created_at'],
-        'text_clean_IT': row['text_clean_IT']
-    })
+    doc = doc_ref.get()
+
+    if not doc.exists:
+        doc_ref.set({
+            'id': index,
+            'text': row['text'],
+            'created_at': row['created_at'],
+            'text_clean_IT': row['text_clean_IT']
+        })
 
 
 
