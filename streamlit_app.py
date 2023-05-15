@@ -24,7 +24,7 @@ for doc in db_ref.stream():
 
 
 WAIT_SECONDS = 15
-def aggiungiTweetOgniNSecondi():
+def aggiungiTweetOgniNSecondi(df):
     df = df.head(NUM)
     for index, row in df.iterrows():
         doc_ref = db_ref.document("i" + str(index))
@@ -39,7 +39,7 @@ def aggiungiTweetOgniNSecondi():
             })
 
 
-schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi)
+schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi(df))
 
 
 
