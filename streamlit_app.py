@@ -39,12 +39,12 @@ def aggiungiTweetOgniNSecondi():
             })
 
 
-schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi())
-
-
-
-while True:
-        schedule.run_pending()
-        NUM += 20
-        df = df.head(NUM)
+# schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi())
+#
+#
+#
+# while True:
+#         schedule.run_pending()
+#         NUM += 20
+#         df = df.head(NUM)
 
