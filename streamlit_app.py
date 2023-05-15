@@ -14,7 +14,7 @@ db_ref = db.collection("tweeets")
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
-df = df.head(NUM)
+
 
 
 # stampiamo tutto il db con un ciclo
@@ -25,6 +25,7 @@ for doc in db_ref.stream():
 
 WAIT_SECONDS = 15
 def aggiungiTweetOgniNSecondi():
+    df = df.head(NUM)
     for index, row in df.iterrows():
         doc_ref = db_ref.document("i" + str(index))
         doc = doc_ref.get()
