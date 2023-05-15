@@ -10,4 +10,4 @@ posts_ref = db.collection("tweets")
 
 # stampiamo tutto il db con un ciclo
 for doc in posts_ref.stream():
-    st.write("the text is: ", doc.text)
+    st.write("the text is: ", doc.to_dict())
