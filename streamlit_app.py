@@ -44,6 +44,6 @@ schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi)
 
 while True:
         schedule.run_pending()
-        NUM += 5
+        NUM += 20
         time.sleep(1)
 
