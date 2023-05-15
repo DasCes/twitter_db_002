@@ -17,6 +17,7 @@ df = df.head(30)
 
 
 # stampiamo tutto il db con un ciclo
+db_ref.order_by('id')
 for doc in db_ref.stream():
     st.write("the id is: ", doc.id)
     st.write("contents of db: ", doc.to_dict())
@@ -43,3 +44,4 @@ schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi)
 while True:
         schedule.run_pending()
         time.sleep(1)
+
