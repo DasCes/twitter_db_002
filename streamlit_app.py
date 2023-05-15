@@ -47,5 +47,4 @@ while True:
         schedule.run_pending()
         NUM += 20
         df = df.head(NUM)
-        time.sleep(1)
 
