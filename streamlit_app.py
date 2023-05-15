@@ -4,16 +4,17 @@ import pandas as pd
 import schedule
 import time
 
+NUM = 5
 
 # qui ci stiamo autenticando a Firestore con la chiave json scaricata e inserita nel progetto
 db = firestore.Client.from_service_account_json("firestore-key.json")
 
 # definiamo il riferimento al db
-db_ref = db.collection("tweeets").order_by('id')
+db_ref = db.collection("tweeets")
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
-df = df.head(30)
+df = df.head(NUM)
 
 
 # stampiamo tutto il db con un ciclo
@@ -22,7 +23,7 @@ for doc in db_ref.stream():
     st.write("contents of db: ", doc.to_dict())
 
 
-WAIT_SECONDS = 5
+WAIT_SECONDS = 15
 def aggiungiTweetOgniNSecondi():
     for index, row in df.iterrows():
         doc_ref = db_ref.document("i" + str(index))
@@ -36,11 +37,13 @@ def aggiungiTweetOgniNSecondi():
                 'text_clean_IT': row['text_clean_IT']
             })
 
+
 schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi)
 
 
 
 while True:
         schedule.run_pending()
+        NUM += 5
         time.sleep(1)
 
