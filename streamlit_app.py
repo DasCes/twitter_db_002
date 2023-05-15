@@ -10,7 +10,7 @@ db_ref = db.collection("tweeets")
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
-df = df.head(10)
+df = df.head(20)
 
 for index, row in df.iterrows():
     doc_ref = db_ref.document("i" + str(index))
