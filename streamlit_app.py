@@ -13,7 +13,7 @@ df = pd.read_csv(f'data/data.csv', index_col=[0])
 df = df.head(3)
 
 for index, row in df.iterrows():
-    doc_ref = db_ref.document()  # Auto-generate document ID
+    doc_ref = db_ref.document(index)
     doc_ref.set({
         'text': row['text'],
         'created_at': row['created_at'],
