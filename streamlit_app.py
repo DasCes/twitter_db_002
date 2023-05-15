@@ -13,7 +13,7 @@ df = pd.read_csv(f'data/data.csv', index_col=[0])
 df = df.head(3)
 
 for index, row in df.iterrows():
-    doc_ref = db_ref.document(str("i"+index))
+    doc_ref = db_ref.document(str("i" % index))
     doc_ref.set({
         'id': index,
         'text': row['text'],
