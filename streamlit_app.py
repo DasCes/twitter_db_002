@@ -10,7 +10,7 @@ NUM = 5
 db = firestore.Client.from_service_account_json("firestore-key.json")
 
 # definiamo il riferimento al db
-db_ref = db.collection("tweeets")
+db_ref = db.collection("tws")
 
 
 df = pd.read_csv(f'data/data.csv', index_col=[0])
