@@ -1,3 +1,5 @@
+import datetime
+
 import streamlit as st
 from google.cloud import firestore
 import pandas as pd
@@ -37,7 +39,7 @@ def aggiungiTweetOgniNSecondi():
     print_db_ref = db.collection("tws").order_by("id")
 
     for doc in print_db_ref.stream():
-        st.write("aggiornamento numero: ", time.time())
+        st.write("aggiornamento numero: ", datetime.datetime.now())
         st.write("the id is: ", doc.id)
         st.write("contents of db: ", doc.to_dict())
 
