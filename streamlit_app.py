@@ -17,12 +17,6 @@ df = pd.read_csv(f'data/data.csv', index_col=[0])
 df = df.head(12)
 
 
-# stampiamo tutto il db con un ciclo
-for doc in db_ref.stream():
-    st.write("the id is: ", doc.id)
-    st.write("contents of db: ", doc.to_dict())
-
-
 
 def aggiungiTweetOgniNSecondi():
 
@@ -47,3 +41,13 @@ scheduler.add_job(aggiungiTweetOgniNSecondi, 'interval', seconds=15)
 
 # Start the scheduler
 scheduler.start()
+
+
+
+
+# stampiamo tutto il db con un ciclo
+print_db_ref = db.collection("tws").order_by("id")
+
+for doc in print_db_ref.stream():
+    st.write("the id is: ", doc.id)
+    st.write("contents of db: ", doc.to_dict())
