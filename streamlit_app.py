@@ -22,6 +22,9 @@ df = df.head(12)
 
 
 def aggiungiTweetOgniNSecondi():
+
+    st.write("aggiornamento numero: ", datetime.datetime.now())
+
     for index, row in df.iterrows():
         doc_ref = db_ref.document("i" + str(index))
         doc = doc_ref.get()
@@ -35,17 +38,6 @@ def aggiungiTweetOgniNSecondi():
             })
 
 
-    # stampiamo tutto il db con un ciclo
-    print_db_ref = db.collection("tws").order_by("id")
-
-    for doc in print_db_ref.stream():
-        st.write("aggiornamento numero: ", datetime.datetime.now())
-        st.write("the id is: ", doc.id)
-        st.write("contents of db: ", doc.to_dict())
-
-
-
-
 
 # Create a scheduler
 scheduler = BackgroundScheduler()
@@ -57,6 +49,12 @@ scheduler.add_job(aggiungiTweetOgniNSecondi, 'interval', seconds=15)
 # Start the scheduler
 scheduler.start()
 
+# stampiamo tutto il db con un ciclo
+print_db_ref = db.collection("tws").order_by("id")
 
+for doc in print_db_ref.stream():
+    st.write("aggiornamento numero: ", datetime.datetime.now())
+    st.write("the id is: ", doc.id)
+    st.write("contents of db: ", doc.to_dict())
 
 
