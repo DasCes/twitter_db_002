@@ -43,7 +43,7 @@ scheduler = BackgroundScheduler()
 
 
 # Schedule the job to run every WAIT_SECONDS
-scheduler.add_job(aggiungiTweetOgniNSecondi(), 'interval', seconds=15)
+scheduler.add_job(aggiungiTweetOgniNSecondi, 'interval', seconds=15)
 
 # Start the scheduler
 scheduler.start()
