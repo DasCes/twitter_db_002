@@ -32,14 +32,18 @@ def aggiungiTweetOgniNSecondi(num):
                 'text_clean_IT': row['text_clean_IT']
             })
 
-    num += 1
+    if num == 0:
+        n = num
+
     # stampiamo tutto il db con un ciclo
     print_db_ref = db.collection("tws").order_by("id")
 
     for doc in print_db_ref.stream():
-        st.write("aggiornamento numero: ", num)
+        st.write("aggiornamento numero: ", n)
         st.write("the id is: ", doc.id)
         st.write("contents of db: ", doc.to_dict())
+
+    n += 1
 
 
 
