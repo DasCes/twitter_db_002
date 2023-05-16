@@ -41,10 +41,11 @@ def aggiungiTweetOgniNSecondi():
 # Create a scheduler
 scheduler = BackgroundScheduler()
 
+
 WAIT_SECONDS = 15
 
 # Schedule the job to run every WAIT_SECONDS
-scheduler.add_job(aggiungiTweetOgniNSecondi(), 'interval', seconds=WAIT_SECONDS)
+scheduler.add_job(aggiungiTweetOgniNSecondi(), 'interval', second=WAIT_SECONDS)
 
 # Start the scheduler
 scheduler.start()
