@@ -1,7 +1,7 @@
 import streamlit as st
 from google.cloud import firestore
 import pandas as pd
-import schedule
+from apscheduler.schedulers.background import BackgroundScheduler
 import time
 
 NUM = 5
@@ -23,7 +23,7 @@ for doc in db_ref.stream():
     st.write("contents of db: ", doc.to_dict())
 
 
-WAIT_SECONDS = 15
+
 def aggiungiTweetOgniNSecondi():
 
     for index, row in df.iterrows():
@@ -38,13 +38,13 @@ def aggiungiTweetOgniNSecondi():
                 'text_clean_IT': row['text_clean_IT']
             })
 
+# Create a scheduler
+scheduler = BackgroundScheduler()
 
-# schedule.every(WAIT_SECONDS).seconds.do(aggiungiTweetOgniNSecondi())
-#
-#
-#
-# while True:
-#         schedule.run_pending()
-#         NUM += 20
-#         df = df.head(NUM)
+WAIT_SECONDS = 15
 
+# Schedule the job to run every WAIT_SECONDS
+scheduler.add_job(aggiungiTweetOgniNSecondi(), 'interval', seconds=WAIT_SECONDS)
+
+# Start the scheduler
+scheduler.start()
