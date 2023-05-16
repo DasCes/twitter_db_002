@@ -4,7 +4,8 @@ import pandas as pd
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
 
-NUM = 5
+global num
+num = 0
 
 # qui ci stiamo autenticando a Firestore con la chiave json scaricata e inserita nel progetto
 db = firestore.Client.from_service_account_json("firestore-key.json")
@@ -19,7 +20,6 @@ df = df.head(12)
 
 
 def aggiungiTweetOgniNSecondi():
-
     for index, row in df.iterrows():
         doc_ref = db_ref.document("i" + str(index))
         doc = doc_ref.get()
@@ -31,6 +31,10 @@ def aggiungiTweetOgniNSecondi():
                 'created_at': row['created_at'],
                 'text_clean_IT': row['text_clean_IT']
             })
+    num += 1
+
+
+
 
 # Create a scheduler
 scheduler = BackgroundScheduler()
@@ -49,5 +53,6 @@ scheduler.start()
 print_db_ref = db.collection("tws").order_by("id")
 
 for doc in print_db_ref.stream():
+    st.write("aggiornamento numero: ", num)
     st.write("the id is: ", doc.id)
     st.write("contents of db: ", doc.to_dict())
