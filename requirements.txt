@@ -1,4 +1,4 @@
 streamlit
 google-cloud-firestore
 pandas
-schedule
+apscheduler
